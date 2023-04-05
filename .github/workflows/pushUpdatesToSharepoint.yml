@@ -8,24 +8,18 @@ on:
 
 
 jobs:
-  PushToSharepoint:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Install Pandoc
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+    - name: 'Run Azure CLI commands'
       run: |
-        sudo apt-get update
-        sudo apt-get install -y pandoc
-        pandoc --version
-
-    # Convert md files to http 
-    - name: Convert Markdown to HTML
-      run: |
-        mkdir output
-        pandoc --version
-        find mdfiles -name "*.md" -exec sh -c 'pandoc {} -o "output/$(basename {} .md)".html ' \;
-        ls -R
-      
+          az account show
+          az group list
+          pwd
