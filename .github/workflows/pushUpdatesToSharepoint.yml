@@ -15,18 +15,16 @@ jobs:
     #- name: Checkout code
     #  uses: actions/checkout@v2
 
-    # Install Python and Pandoc and check version
-    - name: Install Python and Pandoc
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-        run: |
-          pip install pandoc
+    - name: Install Pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+        pandoc --version
 
     #pandoc input.md -o output.html
     # Check version of pandoc
-    - name: Convert Markdown to HTML
-      run: |
-        pip install pandoc
-        pandoc --version
+    #- name: Convert Markdown to HTML
+    #  run: |
+    #    pip install pandoc
+    #    pandoc --version
       
