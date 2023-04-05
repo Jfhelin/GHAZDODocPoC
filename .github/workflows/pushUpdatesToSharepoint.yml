@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    #- name: Checkout code
-    #  uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Install Pandoc
       run: |
@@ -24,5 +24,6 @@ jobs:
     # Convert md files to http 
     - name: Convert Markdown to HTML
       run: |
+        ls 
         pandoc --version
       
