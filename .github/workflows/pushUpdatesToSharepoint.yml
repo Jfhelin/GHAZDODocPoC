@@ -8,25 +8,25 @@ on:
 
 
 jobs:
-  build:
+  PushToSharepoint:
     runs-on: ubuntu-latest
 
     steps:
-    #- name: Checkout code
-    #  uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    # Install Python and Pandoc and check version
-    - name: Install Python and Pandoc
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-        run: |
-          pip install pandoc
-          pandoc --version
+    - name: Install Pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+        pandoc --version
 
-    #pandoc input.md -o output.html
-    # Check version of pandoc
-    #- name: Convert Markdown to HTML
-    #  run: |
-    #    pandoc --version
+    # Convert md files to http 
+    - name: Convert Markdown to HTML
+      run: |
+        ls -R
+        mkdir output
+        pandoc --version
+        find mdfiles -name "*.md" -exec sh -c 'pandoc {} -o "output/$(basename {} .md)".html ' \;
+        ls -R
       
