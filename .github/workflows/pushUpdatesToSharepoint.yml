@@ -27,5 +27,6 @@ jobs:
     # Check version of pandoc
     - name: Convert Markdown to HTML
       run: |
+        pip install pandoc
         pandoc --version
       
