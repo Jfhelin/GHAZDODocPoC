@@ -24,6 +24,9 @@ jobs:
     # Convert md files to http 
     - name: Convert Markdown to HTML
       run: |
-        ls 
+        ls -R
+        mkdir output
         pandoc --version
+        find mdfiles -name "*.md" -exec sh -c 'pandoc {} -o "output/$(basename {} .md)".html ' \;
+        ls -R
       
